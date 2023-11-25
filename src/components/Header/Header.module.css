@@ -1,0 +1,47 @@
+.container_1 {
+  height: 75px;
+  display: grid;
+  grid-template-columns: 10fr 1fr;
+  place-items: center;
+  background-color: #000000;
+}
+
+.container_1_box_1 {
+  display: flex;
+  gap: 100px;
+}
+
+.nav_link {
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
+  padding: 5px 10px;
+}
+
+.active_nav_link {
+  background-color: white;
+  color: #000000;
+  border-radius: 5px;
+}
+
+.container_2 {
+  display: grid;
+  gap: 15px;
+  place-items: center;
+  background-color: #777777;
+  color: white;
+  padding: 30px;
+}
+
+.container_2 p {
+  font-size: 90px;
+  font-weight: bold;
+}
+
+.container_2 button {
+  padding: 15px;
+  background-color: #777777;
+  border: 1px solid #56ccf2;
+  color: white;
+  font-size: 24px;
+}
