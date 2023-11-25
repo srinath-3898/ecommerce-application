@@ -1,16 +1,19 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./Header.module.css";
 import Link from "next/link";
 import { PlayCircleOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Badge } from "antd";
 import { usePathname, useRouter } from "next/navigation";
+import { CartContext } from "@/store/Cart/CartContext";
 
-const Header = ({ cartOepn, setCartOepn }) => {
+const Header = () => {
   const router = useRouter();
   const pathname = usePathname()
     .split("/")
     .filter((x) => x)[0];
+
+  const { items, onOpen } = useContext(CartContext);
 
   const [activeNavlink, setActiveNavlink] = useState("");
 
@@ -19,7 +22,7 @@ const Header = ({ cartOepn, setCartOepn }) => {
   }, [pathname]);
 
   return (
-    <header>
+    <div className={styles.header}>
       <div className={styles.container_1}>
         <div className={styles.container_1_box_1}>
           <Link
@@ -47,10 +50,10 @@ const Header = ({ cartOepn, setCartOepn }) => {
             About
           </Link>
         </div>
-        <Badge count={0} showZero size="small">
+        <Badge count={items.length} showZero size="small">
           <ShoppingCartOutlined
             style={{ color: "white", fontSize: 30 }}
-            onClick={() => setCartOepn(!cartOepn)}
+            onClick={onOpen}
           />
         </Badge>
       </div>
@@ -59,7 +62,7 @@ const Header = ({ cartOepn, setCartOepn }) => {
         <button>Get Our Latest Albums</button>
         <PlayCircleOutlined style={{ color: "#56ccf2", fontSize: 100 }} />
       </div>
-    </header>
+    </div>
   );
 };
 
