@@ -49,6 +49,14 @@ const Header = () => {
           >
             About
           </Link>
+          <Link
+            href={"/contactus"}
+            className={`${styles.nav_link} ${
+              activeNavlink === "contactus" ? styles.active_nav_link : ""
+            }`}
+          >
+            Contact Us
+          </Link>
         </div>
         <Badge count={items.length} showZero size="small">
           <ShoppingCartOutlined

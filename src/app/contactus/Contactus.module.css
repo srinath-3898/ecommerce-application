@@ -1,0 +1,29 @@
+.contact_us {
+  width: 50%;
+  margin: auto;
+  display: grid;
+  place-items: center;
+  gap: 15px;
+  padding: 20px;
+}
+
+.input_controller {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+}
+
+.input_controller input {
+  padding: 5px 10px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.submit_btn {
+  padding: 5px 10px;
+  border: none;
+  color: white;
+  background-color: #56ccf2;
+  border-radius: 5px;
+}
