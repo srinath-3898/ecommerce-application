@@ -1,0 +1,21 @@
+.container {
+  width: 70%;
+  margin: auto;
+  padding: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.container h1 {
+  text-align: center;
+}
+
+.container_1 {
+  display: flex;
+  gap: 30px;
+}
+
+.container_1 img {
+  border-radius: 50%;
+}
