@@ -8,7 +8,13 @@ const About = () => {
     <div className={styles.container}>
       <h1>ABOUT</h1>
       <div className={styles.container_1}>
-        <Image src={band} width={250} height={250} alt="" />
+        <Image
+          src={band}
+          width={200}
+          height={200}
+          alt=""
+          style={{ float: "left" }}
+        />
         <p>
           Lorem ipsum carrots enhanced rebates. Excellent sayings of a man of
           sorrows, hates no prosecutors will unfold in the enduring of which
