@@ -1,0 +1,33 @@
+.container {
+  display: grid;
+  place-items: center;
+}
+
+.login_form {
+  display: grid;
+  gap: 15px;
+  place-items: center;
+  margin-top: 150px;
+}
+
+.input_controller {
+  display: grid;
+  grid-template-columns: 100px 240px;
+  align-items: center;
+}
+
+.input_controller input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+  outline: none;
+}
+
+.login_btn {
+  padding: 10px;
+  width: 150px;
+  border: none;
+  background-color: #56ccf2;
+  color: white;
+  border-radius: 5px;
+}

@@ -1,10 +1,15 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "./Store.module.css";
 import Card from "@/components/Card/Card";
 import ProductsContext from "@/store/Products/ProductsContext";
+import { AuthContext } from "@/store/Auth/AuthContext";
+import { useRouter } from "next/navigation";
 
 const Store = () => {
+  const router = useRouter();
+  const { token } = useContext(AuthContext);
+
   const { products } = useContext(ProductsContext);
 
   return (
