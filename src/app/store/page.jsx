@@ -12,7 +12,13 @@ const Store = () => {
 
   const { products } = useContext(ProductsContext);
 
-  return (
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      router.push("/login");
+    }
+  }, []);
+
+  return token ? (
     <div className={styles.container}>
       <p className={styles.music}>Music</p>
       <div className={styles.products}>
@@ -21,6 +27,8 @@ const Store = () => {
         ))}
       </div>
     </div>
+  ) : (
+    <></>
   );
 };
 
