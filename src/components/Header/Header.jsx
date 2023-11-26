@@ -1,25 +1,20 @@
 "use client";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import styles from "./Header.module.css";
 import Link from "next/link";
 import { PlayCircleOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Badge } from "antd";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { CartContext } from "@/store/Cart/CartContext";
 
 const Header = () => {
-  const router = useRouter();
-  const pathname = usePathname()
+  const pathnames = usePathname()
     .split("/")
-    .filter((x) => x)[0];
+    .filter((x) => x);
+
+  const pathname = pathnames.length > 0 ? pathnames[0] : "";
 
   const { items, onOpen } = useContext(CartContext);
-
-  const [activeNavlink, setActiveNavlink] = useState("");
-
-  useEffect(() => {
-    setActiveNavlink(pathname || "");
-  }, [pathname]);
 
   return (
     <div className={styles.header}>
@@ -28,7 +23,7 @@ const Header = () => {
           <Link
             href={"/"}
             className={`${styles.nav_link} ${
-              activeNavlink === "" ? styles.active_nav_link : ""
+              pathname === "" ? styles.active_nav_link : ""
             }`}
           >
             Home
@@ -36,7 +31,7 @@ const Header = () => {
           <Link
             href={"/store"}
             className={`${styles.nav_link} ${
-              activeNavlink === "store" ? styles.active_nav_link : ""
+              pathname === "store" ? styles.active_nav_link : ""
             }`}
           >
             Store
@@ -44,7 +39,7 @@ const Header = () => {
           <Link
             href={"/about"}
             className={`${styles.nav_link} ${
-              activeNavlink === "about" ? styles.active_nav_link : ""
+              pathname === "about" ? styles.active_nav_link : ""
             }`}
           >
             About
@@ -52,7 +47,7 @@ const Header = () => {
           <Link
             href={"/contactus"}
             className={`${styles.nav_link} ${
-              activeNavlink === "contactus" ? styles.active_nav_link : ""
+              pathname === "contactus" ? styles.active_nav_link : ""
             }`}
           >
             Contact Us
@@ -65,11 +60,15 @@ const Header = () => {
           />
         </Badge>
       </div>
-      <div className={styles.container_2}>
-        <p>The Generics</p>
-        <button>Get Our Latest Albums</button>
-        <PlayCircleOutlined style={{ color: "#56ccf2", fontSize: 100 }} />
-      </div>
+      {pathname === "" ? (
+        <div className={styles.container_2}>
+          <p>The Generics</p>
+          <button>Get Our Latest Albums</button>
+          <PlayCircleOutlined style={{ color: "#56ccf2", fontSize: 100 }} />
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

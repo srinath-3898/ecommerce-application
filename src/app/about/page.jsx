@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./About.module.css";
-import band from "../../assets/Images/band.jpg";
 import Image from "next/image";
+import band from "../../../public/assets/Images/band.jpg";
 
 const About = () => {
   return (

@@ -1,0 +1,44 @@
+.container {
+  width: 80%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.container_1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+}
+
+.container_1 img {
+  width: 80%;
+  height: auto;
+}
+
+.container_1_box_1 {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.container_1 button {
+  padding: 10px;
+  width: 50%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add_to_cart {
+  background-color: #56ccf2;
+  color: white;
+}
+
+.buy_now {
+  background-color: #000000;
+  color: white;
+}
