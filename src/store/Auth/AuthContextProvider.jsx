@@ -4,6 +4,7 @@ import { AuthContext } from "./AuthContext";
 
 const AuthContextProvider = ({ children }) => {
   const [token, setToken] = useState(null);
+  const [user, setUser] = useState({ email: "srinath398@gmail.com" });
 
   const loginHandler = (token) => {
     localStorage.setItem("token", token);
@@ -23,7 +24,12 @@ const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ token: token, onLogin: loginHandler, onLogout: logoutHandler }}
+      value={{
+        token: token,
+        user: user,
+        onLogin: loginHandler,
+        onLogout: logoutHandler,
+      }}
     >
       {children}
     </AuthContext.Provider>

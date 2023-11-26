@@ -2,13 +2,18 @@
 import React, { useContext } from "react";
 import styles from "./Header.module.css";
 import Link from "next/link";
-import { PlayCircleOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { Badge } from "antd";
-import { usePathname } from "next/navigation";
+import {
+  LogoutOutlined,
+  PlayCircleOutlined,
+  ShoppingCartOutlined,
+} from "@ant-design/icons";
+import { Badge, Tooltip } from "antd";
+import { usePathname, useRouter } from "next/navigation";
 import { CartContext } from "@/store/Cart/CartContext";
 import { AuthContext } from "@/store/Auth/AuthContext";
 
 const Header = () => {
+  const router = useRouter();
   const pathnames = usePathname()
     .split("/")
     .filter((x) => x);
@@ -16,7 +21,7 @@ const Header = () => {
   const pathname = pathnames.length > 0 ? pathnames[0] : "";
 
   const { items, onOpen } = useContext(CartContext);
-  const { token } = useContext(AuthContext);
+  const { token, onLogout } = useContext(AuthContext);
 
   return (
     <div className={styles.header}>
@@ -73,12 +78,27 @@ const Header = () => {
             <></>
           )}
         </div>
-        <Badge count={items.length} showZero size="small">
-          <ShoppingCartOutlined
-            style={{ color: "white", fontSize: 30 }}
-            onClick={onOpen}
-          />
-        </Badge>
+        {token ? (
+          <div className={styles.container_1_box_2}>
+            <Badge count={items.length} showZero size="small">
+              <ShoppingCartOutlined
+                style={{ color: "white", fontSize: 30 }}
+                onClick={onOpen}
+              />
+            </Badge>
+            <Tooltip title="Logout">
+              <LogoutOutlined
+                style={{ color: "white", fontSize: 30 }}
+                onClick={() => {
+                  router.push("/");
+                  onLogout();
+                }}
+              />
+            </Tooltip>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
       {pathname === "" ? (
         <div className={styles.container_2}>

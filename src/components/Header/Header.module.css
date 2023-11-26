@@ -18,6 +18,11 @@
   gap: 100px;
 }
 
+.container_1_box_2 {
+  display: flex;
+  gap: 30px;
+}
+
 .nav_link {
   color: white;
   font-size: 18px;

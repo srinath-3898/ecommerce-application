@@ -30,4 +30,10 @@
   background-color: #56ccf2;
   color: white;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.login_btn:disabled {
+  cursor: not-allowed;
+  background-color: gray;
 }
