@@ -19,48 +19,46 @@ const CartContexProvider = ({ children }) => {
     setOepn(false);
   };
 
-  const getCartItems = async () => {
-    try {
-      const response = await axios.get(
-        `https://crudcrud.com/api/cd9a3fcdff764394a9d252f807d5172f/cart${
-          user.email.split("@")[0]
-        }`
-      );
-      setItems(response?.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const addItem = async (item) => {
-    try {
-      await axios.post(
-        `https://crudcrud.com/api/cd9a3fcdff764394a9d252f807d5172f/cart${
-          user.email.split("@")[0]
-        }`,
-        item
+    const alreadyPresetItemIndex = items.findIndex(
+      (cartItem) => cartItem.id === item.id
+    );
+    if (alreadyPresetItemIndex === -1) {
+      setItems((prevState) => [...prevState, { ...item, quantity: 1 }]);
+      setTotalAmount((prevTotalAmount) => prevTotalAmount + item.price);
+    } else {
+      setItems((prevState) =>
+        prevState.map((cartItem) => {
+          if (cartItem.id === item.id) {
+            return { ...cartItem, quantity: cartItem.quantity + 1 };
+          } else {
+            return cartItem;
+          }
+        })
       );
-      getCartItems();
-    } catch (error) {
-      console.log(error);
+      setTotalAmount((prevTotalAmount) => prevTotalAmount + item.price);
     }
   };
 
-  const removeItem = async (id) => {
-    try {
-      await axios.delete(
-        `https://crudcrud.com/api/cd9a3fcdff764394a9d252f807d5172f/cart${
-          user.email.split("@")[0]
-        }/${id}`
+  const removeItem = (item) => {
+    if (item.quantity === 1) {
+      setItems((prevState) =>
+        prevState.filter((cartItem) => cartItem.id !== item.id)
       );
-      getCartItems();
-    } catch (error) {
-      console.log(error);
+    } else {
+      setItems((prevState) =>
+        prevState.map((cartItem) => {
+          if (cartItem.id === item.id) {
+            return { ...cartItem, quantity: cartItem.quantity - 1 };
+          } else {
+            return cartItem;
+          }
+        })
+      );
+      setTotalAmount((prevTotalAmount) => prevTotalAmount + item.price);
     }
   };
-  useEffect(() => {
-    getCartItems();
-  }, []);
+
   return (
     <CartContext.Provider
       value={{
