@@ -41,7 +41,7 @@ const Cart = () => {
                   </button>
                   <button
                     className={styles.minus_btn}
-                    onClick={() => removeItem(item.id, item.quantity)}
+                    onClick={() => removeItem(item?._id)}
                   >
                     -
                   </button>

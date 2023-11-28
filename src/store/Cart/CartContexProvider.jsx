@@ -19,27 +19,6 @@ const CartContexProvider = ({ children }) => {
     setOepn(false);
   };
 
-  // const addItem = async (item) => {
-  //   const alreadyPresetItemIndex = items.findIndex(
-  //     (cartItem) => cartItem.id === item.id
-  //   );
-  //   if (alreadyPresetItemIndex === -1) {
-  //     setItems((prevState) => [...prevState, { ...item, quantity: 1 }]);
-  //     setTotalAmount((prevTotalAmount) => prevTotalAmount + item.price);
-  //   } else {
-  //     setItems((prevState) =>
-  //       prevState.map((cartItem) => {
-  //         if (cartItem.id === item.id) {
-  //           return { ...cartItem, quantity: cartItem.quantity + 1 };
-  //         } else {
-  //           return cartItem;
-  //         }
-  //       })
-  //     );
-  //     setTotalAmount((prevTotalAmount) => prevTotalAmount + item.price);
-  //   }
-  // };
-
   const getCartItems = async () => {
     try {
       const response = await axios.get(
@@ -55,33 +34,28 @@ const CartContexProvider = ({ children }) => {
 
   const addItem = async (item) => {
     try {
-      const response = await axios.post(
+      await axios.post(
         `https://crudcrud.com/api/cd9a3fcdff764394a9d252f807d5172f/cart${
           user.email.split("@")[0]
         }`,
         item
       );
-      console.log(response);
+      getCartItems();
     } catch (error) {
       console.log(error);
     }
   };
 
-  const removeItem = (id, quantity) => {
-    if (quantity === 1) {
-      setItems((prevState) =>
-        prevState.filter((cartItem) => cartItem.id !== id)
+  const removeItem = async (id) => {
+    try {
+      await axios.delete(
+        `https://crudcrud.com/api/cd9a3fcdff764394a9d252f807d5172f/cart${
+          user.email.split("@")[0]
+        }/${id}`
       );
-    } else {
-      setItems((prevState) =>
-        prevState.map((cartItem) => {
-          if (cartItem.id === id) {
-            return { ...cartItem, quantity: cartItem.quantity - 1 };
-          } else {
-            return cartItem;
-          }
-        })
-      );
+      getCartItems();
+    } catch (error) {
+      console.log(error);
     }
   };
   useEffect(() => {
